@@ -1,8 +1,30 @@
-// pages/index.js
+"use client";
 import Head from 'next/head';
 import Script from 'next/script';
+import React from 'react';
 
 export default function Home() {
+    const [name, setName] = React.useState('ColdMilk');
+    const [email, setEmail] = React.useState('');
+    const [message, setMessage] = React.useState('');
+    async function handleSubmit(event) {
+        event.preventDefault();
+        const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, email, message }),
+        });
+        if (response.ok) {
+            alert('Message sent successfully!');
+            setName('');
+            setEmail('');
+            setMessage('');
+        } else {
+            alert('Failed to send message.');
+        }
+    }
   return (
     <>
       <Head>
@@ -77,51 +99,78 @@ export default function Home() {
 
       <div id="work_container" className="container">
         <div onClick={() => window.closework && window.closework()}><i className="fas fa-angle-right"></i></div>
-        <h1>works.</h1>
+        <h1>works</h1>
         <section>
-          <h2>placeholder</h2>
+          <h2>Skills & Technologies
+</h2>
           <p>
-            placeholder
+            Here are some of the technologies and skills I have experience with:
+
+
           </p>
           <div id="used">
             <div><i className="fas fa-circle"></i>&nbsp;HTML</div>
             <div><i className="fas fa-circle"></i>&nbsp;CSS</div>
             <div><i className="fas fa-circle"></i>&nbsp;Javascript</div>
+               <div><i className="fas fa-circle"></i>&nbsp;Tailwind CSS</div>
+               <div><i className="fas fa-circle"></i>&nbsp;Typescript</div>
+            <div><i className="fas fa-circle"></i>&nbsp;React</div>
+            <div><i className="fas fa-circle"></i>&nbsp;Next.js</div>
+            <div><i className="fas fa-circle"></i>&nbsp;Node.js</div>
+            <div><i className="fas fa-circle"></i>&nbsp;Express.js</div>
+           
+            <div><i className="fas fa-circle"></i>&nbsp;SQL</div>
+            <div><i className="fas fa-circle"></i>&nbsp;Git</div>
+            
+            <div><i className="fas fa-circle"></i>&nbsp;Authentication</div>
+
           </div>
-          <button className="btn_one">button 1</button>
-          <button className="btn_two">button 2</button>
+          <button
+  className="btn_one"
+  onClick={() => window.open("https://github.com/FakeColdMilk/plinko-app", "_blank")}
+>
+  Plinko
+</button>
+
+<button
+  className="btn_two"
+  onClick={() => window.open("https://github.com/FakeColdMilk/project2", "_blank")}
+>
+  Game CRUD App
+</button>
+
         </section>
       </div>
 
       <div id="about_container" className="container">
         <div onClick={() => window.closeabout && window.closeabout()}><i className="fas fa-angle-left"></i></div>
-        <h1>about.</h1>
+        <h1>about me</h1>
         <section>
           <h2>about me</h2>
           <p>
-            placeholder
+            I have been studying computer science for the last 3 years, and I am passionate about web development and creating impactful digital experiences.
           </p>
           <p>
-            placeholder
+            In my free time, I enjoy exploring new technologies, contributing to open-source projects, and enhancing my skills through continuous learning. I also do game modding — creating custom content, tools, and scripts to extend gameplay, learn game systems, and experiment with mechanics and assets.
           </p>
         </section>
         <section>
-          <h2>skills</h2>
-          <p>i do eveything ;)</p>
+          <h2>Learning</h2>
+          <p>Linux, Java, Phyton and C</p>
         </section>
       </div>
 
       <div id="contact_container" className="container">
         <div onClick={() => window.closecontact && window.closecontact()}><i className="fas fa-angle-down"></i></div>
-        <h1>contact.</h1>
+        <h1>contact</h1>
         <section>
           <h2>contact me</h2>
           {/* Fixed: removed <p> wrapper that contained <form> (invalid HTML) */}
           <div>
-            <form>
-              <input type="text" placeholder="name" required />
-              <input type="email" placeholder="email" required /><br />
-              <textarea placeholder="your message" required rows="5"></textarea><br />
+            <form onSubmit={handleSubmit}>
+              <input type="text" onChange={(e)=>setName(e.target.value)} placeholder="name" required />
+              <input type="email" onChange={(e)=>setEmail(e.target.value)} placeholder="email" required /><br />
+              <textarea placeholder="your message" onChange={(e)=>setMessage(e.target.value)} required rows="5"></textarea><br />
               <button className="btn_one">send</button>
             </form>
           </div>
