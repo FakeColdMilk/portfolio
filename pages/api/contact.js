@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-const resend = new Resend('re_gywXdNXn_KnYqKpntw3Crw7xuFT6nuhDM');
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 
